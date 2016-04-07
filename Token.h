@@ -5,8 +5,9 @@
 
 class Tokenizer {
 	public:
-		Tokenizer();
+		Tokenizer(double vars[]);
 		double evaluate(const std::string& parsee) const;
+		unsigned int getVarIndex(char varName) const;
 
 };
 
