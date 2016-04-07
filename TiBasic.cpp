@@ -1,7 +1,9 @@
 #include "TiBasic.h"
 
+#include <limits>
+
 int evaluate(std::string) {
-	
+	//This will evaluate an expression
 }
 
 TiBasic::TiBasic(std::vector<std::string> programVector) {
@@ -25,7 +27,7 @@ void TiBasic::run() {
 	while (line < fileSpace.size()) {
 		runLine();
 	}
-	std::cout << "Done";
+	std::cout << "Done\n";
 }
 
 void TiBasic::runLine() {
@@ -35,14 +37,23 @@ void TiBasic::runLine() {
 		//Labels do nothing
 		++line;
 	} else if (curr_line.substr(0,6) == ":Goto " and curr_line.size() > 6) {
-		tigoto(curr_line.substr(6,0-1));
+		tiGoto(curr_line.substr(6,0-1));
 		++line;
 	} else if (curr_line == ":ClrHome") {
 		clrhome();
 		++line;
 	} else if (curr_line.substr(0,6) == ":Disp " and curr_line.size() > 6) {
 		disp(curr_line.substr(6,0-1));
+		++line;
+	} else if (curr_line == ":Pause") {
+		pause();
+		++line;
 	}
+}
+
+void TiBasic::pause() {
+	//Mimics ti-basic's Pause function
+	std::cin.ignore( std::numeric_limits <std::streamsize> ::max(), '\n' );
 }
 
 void TiBasic::disp(std::string output) {

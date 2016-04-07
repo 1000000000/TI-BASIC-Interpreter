@@ -14,6 +14,7 @@ class TiBasic {
 		void disp(std::string output);
 		void runLine();
 		void run();
+		void pause();
 	private:
 		std::vector<std::string> fileSpace;
 		unsigned line;
