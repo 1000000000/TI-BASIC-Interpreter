@@ -30,3 +30,6 @@ tirun
 
 # Test Input Files
 *.txt
+
+# Files from VIm and other editors
+*.swp
