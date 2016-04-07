@@ -3,6 +3,7 @@
 
 class Tokenizer {
 	public:
+		Tokenizer();
 		double evaluate(std::string parsee) const;
 
 };
