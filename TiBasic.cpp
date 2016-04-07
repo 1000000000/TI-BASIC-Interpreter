@@ -2,10 +2,6 @@
 
 #include <limits>
 
-int evaluate(std::string) {
-	//This will evaluate an expression
-}
-
 TiBasic::TiBasic(std::vector<std::string> programVector) {
 	fileSpace = programVector;
 	line = 0;
@@ -51,7 +47,14 @@ void TiBasic::runLine() {
 	} else if (curr_line.substr(0,8) == ":Prompt " and curr_line.size() == 9) {
 		prompt(curr_line.c_str()[9]);
 		++line;
+	} else if (curr_line.substr(0,8) == ":DelVar ") {
+		delvar(curr_line.c_str()[9]);
 	}
+}
+
+void TiBasic::delvar(char varName) {
+	//Mimics ti-basic's DelVar function
+	vars[varName-'?'] = 0;
 }
 
 void TiBasic::prompt(char varName) {
@@ -59,11 +62,7 @@ void TiBasic::prompt(char varName) {
 	//'~'+107 is a theta
 	std::string input = "";
 	std::cin >> input;
-	if (varName == '?') {
-		vars[26] = evaluate(input);
-	} else {
-		vars[varName-'A'] = evaluate(input);
-	}
+	vars[varName-'?'] = evaluate(input);
 }
 
 void TiBasic::pause() {

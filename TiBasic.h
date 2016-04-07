@@ -13,6 +13,7 @@ class TiBasic {
 		void tiGoto(std::string label);
 		void disp(std::string output);
 		void prompt(char varName);
+		void delvar(char varName);
 		void runLine();
 		void run();
 		void pause();
