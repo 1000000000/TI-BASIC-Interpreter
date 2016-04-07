@@ -61,6 +61,7 @@ void TiBasic::prompt(char varName) {
 	//Mimics ti-basic's Prompt function
 	//'~'+107 is a theta
 	std::string input = "";
+	std::cout << varName << "=?";
 	std::cin >> input;
 	vars[varName-'?'] = evaluate(input);
 }
