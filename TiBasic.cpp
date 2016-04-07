@@ -76,7 +76,7 @@ void TiBasic::pause() const {
 	std::cin.ignore( std::numeric_limits <std::streamsize> ::max(), '\n' );
 }
 
-void TiBasic::disp(std::string output) const {
+void TiBasic::disp(std::string output) {
 	//Mimics ti-basic's Disp function
 	bool in_quotes = false;
 	std::string chunk = "";
