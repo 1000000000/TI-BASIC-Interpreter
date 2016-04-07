@@ -48,6 +48,21 @@ void TiBasic::runLine() {
 	} else if (curr_line == ":Pause") {
 		pause();
 		++line;
+	} else if (curr_line.substr(0,8) == ":Prompt " and curr_line.size() == 9) {
+		prompt(curr_line.c_str()[9]);
+		++line;
+	}
+}
+
+void TiBasic::prompt(char varName) {
+	//Mimics ti-basic's Prompt function
+	//'~'+107 is a theta
+	std::string input = "";
+	std::cin >> input;
+	if (varName == '?') {
+		vars[26] = evaluate(input);
+	} else {
+		vars[varName-'A'] = evaluate(input);
 	}
 }
 
