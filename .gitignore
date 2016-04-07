@@ -27,3 +27,6 @@
 *.out
 *.app
 tirun
+
+# Test Input Files
+*.txt
