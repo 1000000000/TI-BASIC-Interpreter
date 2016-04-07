@@ -1,6 +1,8 @@
 #ifndef _token_h__
 #define _token_h__
 
+#include <string>
+
 class Tokenizer {
 	public:
 		Tokenizer();
