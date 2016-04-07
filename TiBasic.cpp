@@ -63,15 +63,15 @@ void TiBasic::prompt(char varName) {
 	std::string input = "";
 	std::cout << varName << "=?";
 	std::cin >> input;
-	vars[varName-'?'] = evaluate(input);
+	vars[varName-'?'] = parser.evaluate(input);
 }
 
-void TiBasic::pause() {
+void TiBasic::pause() const {
 	//Mimics ti-basic's Pause function
 	std::cin.ignore( std::numeric_limits <std::streamsize> ::max(), '\n' );
 }
 
-void TiBasic::disp(std::string output) {
+void TiBasic::disp(std::string output) const {
 	//Mimics ti-basic's Disp function
 	bool in_quotes = false;
 	std::string chunk = "";
@@ -79,6 +79,7 @@ void TiBasic::disp(std::string output) {
 		char current = output[x];
 		if (current == ',' and !in_quotes) {
 			//code here
+			parser.evaluate(chunk);
 		} else {
 			if (current == '"') {
 				in_quotes = !in_quotes;
@@ -93,7 +94,7 @@ void TiBasic::tiGoto(std::string label) {
 	line = labels[label];
 }
 
-void TiBasic::clrhome() {
+void TiBasic::clrhome() const {
 	//Mimics ti-basic's ClrHome function
 	std::cout << "\033[2J";
 }
