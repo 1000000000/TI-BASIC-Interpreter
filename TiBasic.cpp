@@ -54,7 +54,17 @@ void TiBasic::runLine() {
 		++line;
 	} else if (curr_line.substr(0,8) == ":DelVar ") {
 		delvar(curr_line.c_str()[9]);
+	} else if (curr_line.substr(0,7) == ":Input " and curr_line.size() == 8) {
+		input(curr_line.c_str()[8]);
 	}
+}
+
+void TiBasic::input(char varName) {
+	//Mimics ti-basic's Input function
+	std::string flowIn = "";
+	std::cout << '?';
+	std::cin >> flowIn;
+	var(varName) = parser.evaluate(flowIn);
 }
 
 void TiBasic::delvar(char varName) {
@@ -64,11 +74,10 @@ void TiBasic::delvar(char varName) {
 
 void TiBasic::prompt(char varName) {
 	//Mimics ti-basic's Prompt function
-	//'~'+107 is a theta
-	std::string input = "";
+	std::string flowIn = "";
 	std::cout << varName << "=?";
-	std::cin >> input;
-	var(varName) = parser.evaluate(input);
+	std::cin >> flowIn;
+	var(varName) = parser.evaluate(flowIn);
 }
 
 void TiBasic::pause() const {
