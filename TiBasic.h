@@ -9,7 +9,7 @@
 
 class TiBasic {
 	public:
-		TiBasic(std::vector<std::string> programVector);
+		TiBasic(char* fileName);
 		void clrhome() const;
 		void tiGoto(std::string label);
 		void disp(std::string output) const;

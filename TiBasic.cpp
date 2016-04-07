@@ -1,17 +1,23 @@
 #include "TiBasic.h"
 
 #include <limits>
+#include <fstream>
 
-TiBasic::TiBasic(std::vector<std::string> programVector) {
-	fileSpace = programVector;
-	line = 0;
-	//Set up labels for quicker access later
-	for (unsigned x = 0; x < fileSpace.size(); ++x) {
-		std::string curr_line = fileSpace[x];
+TiBasic::TiBasic(char* fileName) {
+	std::fstream f;
+	f.open(fileName);
+	std::string curr_line;
+	unsigned x = 0;
+	while (getline(f, curr_line, ':')) {
+		curr_line = ":"+curr_line;
+		fileSpace.push_back(curr_line);
+		//Set up labels for quicker access later
 		if (curr_line.substr(0,5) == ":Lbl " and curr_line.size() > 5) {
 			labels[curr_line.substr(5,0-1)] = x;
 		}
+		++x;
 	}
+	line = 0;
 	//Assign all the variables to zero
 	for (unsigned x = 0; x < 28; ++x) {
 		vars[x] = 0;
