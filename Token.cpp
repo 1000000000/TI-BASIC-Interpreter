@@ -2,6 +2,6 @@
 
 Tokenizer::Tokenizer() {}
 
-double Tokenizer::evaluate(std::string parsee) {
+double Tokenizer::evaluate(const std::string& parsee) const {
 	return 4;
 }
