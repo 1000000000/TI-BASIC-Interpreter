@@ -3,7 +3,7 @@
 #include <limits>
 #include <fstream>
 
-TiBasic::TiBasic(char* fileName) {
+TiBasic::TiBasic(char* fileName) : line(0), parser(vars) {
 	std::fstream f;
 	f.open(fileName);
 	std::string curr_line;
@@ -17,7 +17,6 @@ TiBasic::TiBasic(char* fileName) {
 		}
 		++x;
 	}
-	line = 0;
 	//Assign all the variables to zero
 	for (unsigned x = 0; x < 28; ++x) {
 		vars[x] = 0;
@@ -60,7 +59,7 @@ void TiBasic::runLine() {
 
 void TiBasic::delvar(char varName) {
 	//Mimics ti-basic's DelVar function
-	vars[varName-'?'] = 0;
+	var(varName) = 0;
 }
 
 void TiBasic::prompt(char varName) {
@@ -69,7 +68,7 @@ void TiBasic::prompt(char varName) {
 	std::string input = "";
 	std::cout << varName << "=?";
 	std::cin >> input;
-	vars[varName-'?'] = parser.evaluate(input);
+	var(varName) = parser.evaluate(input);
 }
 
 void TiBasic::pause() const {
@@ -77,7 +76,7 @@ void TiBasic::pause() const {
 	std::cin.ignore( std::numeric_limits <std::streamsize> ::max(), '\n' );
 }
 
-void TiBasic::disp(std::string output) const {
+void TiBasic::disp(std::string output) {
 	//Mimics ti-basic's Disp function
 	bool in_quotes = false;
 	std::string chunk = "";
@@ -103,4 +102,8 @@ void TiBasic::tiGoto(std::string label) {
 void TiBasic::clrhome() const {
 	//Mimics ti-basic's ClrHome function
 	std::cout << "\033[2J";
+}
+
+double& TiBasic::var(char varName) {
+	return vars[parser.getVarIndex(varName)];
 }
