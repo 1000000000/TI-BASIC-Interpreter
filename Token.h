@@ -9,7 +9,9 @@ class Tokenizer {
 		double evaluate(const std::string& parsee);
 		unsigned int getVarIndex(char varName) const;
 		bool isVar(char varName) const;
-
+		double operate(char operatorName, double val1);
+		double operate(char operatorName, double val1, double val2);
+		double unit_evaluate(const std::string& unit);
 	private:
 		double* vars;
 };
