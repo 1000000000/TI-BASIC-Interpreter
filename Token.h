@@ -3,6 +3,8 @@
 
 #include <string>
 
+enum OpOrder {UNKNOWN, UNITS, PARENS, FACTORIAL, EXPONENT, COMBINATORICS, MULTIPLY_DIVIDE, ADD_SUBTRACT};
+
 class Tokenizer {
 	public:
 		Tokenizer(double var_vals[]) : vars(var_vals) {}
