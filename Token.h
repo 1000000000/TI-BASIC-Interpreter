@@ -3,16 +3,21 @@
 
 #include <string>
 
-enum OpOrder {UNKNOWN, UNITS, PARENS, FACTORIAL, EXPONENT, COMBINATORICS, MULTIPLY_DIVIDE, ADD_SUBTRACT};
+enum Symbols {
+	TS_LEFT_PARENS,
+	TS_RIGHT_PARENS,
+	TS_FACTORIAL,
+	TS_UNIT,
+	TS_END,
+	NTS_START,
+	UNKNOWN
+};
 
 class Tokenizer {
 	public:
 		Tokenizer(double var_vals[]) : vars(var_vals) {}
-		double evaluate(const std::string& parsee);
 		unsigned int getVarIndex(char varName) const;
 		bool isVar(char varName) const;
-		double operate(char operatorName, double val1);
-		double operate(char operatorName, double val1, double val2);
 		double unit_evaluate(const std::string& unit);
 	private:
 		double* vars;
